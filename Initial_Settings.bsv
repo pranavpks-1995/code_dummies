@@ -57,7 +57,7 @@ import Real :: * ;
 	Real k1_phase = 1;
 	Real k2_phase = 0;
 
-	Real[msToProcess/integrationTime] i_P,	i_E, i_L, q_E, q_P, q_L,
+	Real trackResults [500], i_P,	i_E, i_L, q_E, q_P, q_L,
 			theta, filttheta, freqdev, phi, dopplerFreq, carrFreq, 
 			codeFreq, codephase, filtcodephase,codeError, lockCheck, est_CNR, dPRange, data, data_boundary, acq_Skip;
 	Real acqTh = 0;
