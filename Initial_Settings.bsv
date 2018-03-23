@@ -2,7 +2,8 @@
 package Initial_Settings;
 
 import FixedPoint :: *; 
-import Real :: * ;
+//import Real :: * ;
+import Vector :: * ;
 
 	`define fileName            '/home/Final/Project Final Work SPS/The Final Receiver_SPS/Signals/compactdata.bin'
 
@@ -14,34 +15,33 @@ import Real :: * ;
 
 	// Intermediate, sampling and code frequencies
 
-	Real iF                 = 3.563e6;      //[Hz] for compactdata.bin
-	Real samplingFreq       = 12e6;     //[Hz] for compactdata.bin
-	Real codeFreqBasis      = 1.023e6;      //[Hz] chip rate
-	Real codeLength         = 1023;
+	Int#(64) iF                 = 3563000;      //[Hz] for compactdata.bin
+	Int#(64) samplingFreq       = 12000000;     //[Hz] for compactdata.bin
+	Int#(64) codeFreqBasis      = 1023000;      //[Hz] chip rate
+	Int#(32) codeLength         = 1023;
 
 	//// Processing settings ====================================================
 	// Number of milliseconds to be processed
-	Real msToProcess        = 500;        //[ms]
+	Int#(32) msToProcess        = 500;        //[ms]
 	// Number of channels to be used for signal processing
-	Real numberOfChannels   = 11;
+	Int#(32) numberOfChannels   = 11;
 	// Move the starting point of processing.
-	Real skipNumberOfBytes     = 500*26e6;
-
+	Int#(64) skipNumberOfBytes     = 13000000000;
 
 	//// Acquisition settings ===================================================
 	// Band around IF to search for satellite signal. Depends on max Doppler
-	Real acqSearchBand      = 20;           //[kHz] for cold start
-	Real acqSearchBand_warm_start      = 10;           //[kHz] for warm start
+	Int#(32) acqSearchBand      = 20;           //[kHz] for cold start
+	Int#(32) acqSearchBand_warm_start      = 10;           //[kHz] for warm start
 
 	// Threshold for the signal presence decision rule
-	Real acqThreshold       = 1.9; // Considered as the threshold for the ratio of signal power to noise power
+	FixedPoint#(2,32) acqThreshold       = 1.9; // Considered as the threshold for the ratio of signal power to noise power
 
 	// Down sampling of the signal for acquisition
-	Real downByFactor       = 1;
+	Int#(32) downByFactor       = 1;
 
 
 	// The block length taken for processing
-	Real integrationTime    = 1; // in ms, currently receiver may not work properly if it is changed
+	Int#(32) integrationTime    = 1; // in ms, currently receiver may not work properly if it is changed
 
 	//// Tracking loops settings ================================================
 	// Code tracking loop parameters
@@ -50,18 +50,10 @@ import Real :: * ;
 	// Carrier tracking loop parameters
 
 	// FLL loop filter coefficients
-	Real k1_freq = 0.305;
-	Real k2_freq = 0.695;
+	FixedPoint#(2,32) k1_freq = 0.305;
+	FixedPoint#(2,32) k2_freq = 0.695;
 
 	// PLL loop filter coefficients
-	Real k1_phase = 1;
-	Real k2_phase = 0;
-
-	Real trackResults [500], i_P,	i_E, i_L, q_E, q_P, q_L,
-			theta, filttheta, freqdev, phi, dopplerFreq, carrFreq, 
-			codeFreq, codephase, filtcodephase,codeError, lockCheck, est_CNR, dPRange, data, data_boundary, acq_Skip;
-	Real acqTh = 0;
-	Real prn = 0;
-	
-
+	FixedPoint#(2,32) k1_phase = 1;
+	FixedPoint#(2,32) k2_phase = 0;
 endpackage: Initial_Settings

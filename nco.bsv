@@ -2,25 +2,26 @@ package nco;
 	import Initial_Settings ::*;
 	import Vector ::*;
 	import Real ::*;
+	import FixedPoint :: *;
 	UInt#(16) aarr[10];
 	typedef struct 
 	{
 		// UInt#(32) sincarr[10];
 		// UInt#(32) coscarr[10];
-		Vector #(10, Real) sincarr;
-		Vector #(10, Real) coscarr;
-		Real lastPhase;
+		Vector #(10, FixedPoint#(2,32)) sincarr;
+		Vector #(10, FixedPoint#(2,32)) coscarr;
+		FixedPoint#(2,32) lastPhase;
 	} Result1 deriving (Bits,Eq);
 
-	function Result1 mkNco(Real frqBin, Bit#(64) samples_per_code, Real loopcnt, Real samplingFreq, Real theta);
-		Real x = pi ;
+	function Result1 mkNco(FixedPoint#(2,32) frqBin, Bit#(64) samples_per_code, Int#(32) loopcnt, Int#(32) samplingFreq, FixedPoint#(2,32) theta);
+		FixedPoint#(2,32) x = fromReal(pi) ;
 		// UInt#(32) sincarry[10];
 		// UInt#(32) coscarry[10];
-		// Bit#(64) samplespercode = $realtobits(samples_per_code);
+		// Bit#(64) samplespercode = $FixedPoint#(2,32)tobits(samples_per_code);
 
-		Vector #(10, Real) sincarry;
-		Vector #(10, Real) coscarry;
-		Real lastPhase;
+		Vector #(10, FixedPoint#(2,32)) sincarry;
+		Vector #(10, FixedPoint#(2,32)) coscarry;
+		FixedPoint#(2,32) lastPhase;
 		Real t[1000];
 		Real arg[1000];
 		Bit#(64) i = 0;
@@ -31,11 +32,11 @@ package nco;
 
 			t[i] = (t[i]+1)/samplingFreq;
 			arg[i] = (frqBin*2*x*t[i]) + theta;
-			sincarry[i] = sin(arg[i]);
-			coscarry[i] = cos(arg[i]);
+			sincarry[i] = fromReal(sin(arg[i]));
+			coscarry[i] = fromReal(cos(arg[i]));
 		end
 
-		lastPhase = arg[0];
+		lastPhase = fromReal(arg[0]);
 		Result1 ret = Result1{sincarr:sincarry, coscarr:coscarry, lastPhase:lastPhase};
 		return ret;
 	endfunction
