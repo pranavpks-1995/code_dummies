@@ -2,7 +2,7 @@ package initial_Acquisition;
 
 
     import Initial_Settings :: *;
-    import Processing :: *;
+    import processing :: *;
     import Real :: *;
     import FixedPoint :: *;
     import nco ::*;

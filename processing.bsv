@@ -2,7 +2,7 @@ package processing;
 	import Initial_Settings::*;
 
 
-	Int size1 = msToProcess/integrationTime;
+	Int#(32) size1 = msToProcess/integrationTime;
 	typedef struct 
 	{
 		//Real[msToProcess/integrationTime] i_P, i_E, i_L, q_E, q_P, q_L, theta, filttheta, freqdev, phi, dopplerFreq, carrFreq, codeFreq, codephase, filtcodephase,codeError, lockCheck, est_CNR, dPRange, data, data_boundary, acq_Skip;

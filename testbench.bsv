@@ -1,17 +1,14 @@
 // testbench
 
-import nco::*;
+import generatePRN::*;
 	import Initial_Settings ::*;
 	import Vector ::*;
 	import Real ::*;
 	import FixedPoint ::*;
-module testbench(Empty);
-
+	import Lock_Detectors ::*;
+module test(Empty);
 rule show;
-FixedPoint#(2,32) temp=15;
-Bit#(64) samples = 10;
-let x = mkNco(temp,samples,temp,temp,temp);
-	$display("%2.3f",x.lastPhase);
-	$finish(0);
+	Lock_Detector;
+	$display("Hello World");
 endrule
 endmodule
