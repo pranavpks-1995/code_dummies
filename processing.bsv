@@ -14,7 +14,7 @@ package processing;
 	} track deriving (Bits, Eq);
 	function mkProcess();
 		Vector#(numberOfChannels,track) trackResults;
-		for(Int i=0; i<numberOfChannels; i = i+1)
+		for(Int#(32) i=0; i<numberOfChannels; i = i+1)
 		begin
 			trackResults[i].i_P = replicate(0);
 			trackResults[i].i_E = replicate(0);
