@@ -8,7 +8,7 @@ import generatePRN::*;
 	import Lock_Detectors ::*;
 module test(Empty);
 rule show;
-	Lock_Detector;
+	lock_Detector;
 	$display("Hello World");
 endrule
 endmodule
