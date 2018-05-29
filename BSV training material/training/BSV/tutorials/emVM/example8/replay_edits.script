@@ -1,0 +1,6 @@
+# replay script for adding circuit edits
+# Generated on: Thu Jan 12 13:44:05 PST 2012
+
+addprobe req_fifo_D_OUT /mkBridge/scemi_dut_dutIfc/req_fifo D_OUT CLK 1'b1 UInt#(64) Any
+addprobe resp_fifo_D_OUT /mkBridge/scemi_dut_dutIfc/resp_fifo D_OUT CLK 1'b1 UInt#(64) Any
+

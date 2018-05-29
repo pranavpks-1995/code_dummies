@@ -1,0 +1,35 @@
+[DEFAULT]
+default-targets:   bsim_dut tb
+
+[dut]
+hide-target
+top-file:             Bridge.bsv
+verilog-directory:    build
+binary-directory:     build
+simulation-directory: build
+
+[bsim_dut]
+extends-target: dut
+build-for:      bluesim
+scemi-type:     TCP
+exe-file:       bsim_dut
+
+[vlog_dut]
+extends-target: dut
+build-for:      verilog
+scemi-type:     TCP
+exe-file:       vlog_dut
+
+[tb]
+scemi-tb
+build-for: c++
+c++-header-targets: none
+c++-files: Tb.cpp
+exe-file: tb
+
+[clean]
+run-shell: rm -rf build
+run-shell: rm -f bsim_dut bsim_dut.so bsim_dut*.log
+run-shell: rm -f vlog_dut directc_* vlog_dut*.log
+run-shell: rm -f tb *.params tb*.log
+

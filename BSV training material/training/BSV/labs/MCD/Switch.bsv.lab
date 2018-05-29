@@ -1,0 +1,18 @@
+import FIFO::*;
+
+interface Switch#(type t);
+  method Action enq_a(t x); 
+  method Action enq_b(t x); 
+  method Action deq(); 
+  method t first(); 
+  method Action flip(); 
+endinterface
+
+(* synthesize *)
+module mkSwitch(Switch#(Bit#(32)) ifc);
+
+// ...
+
+endmodule
+
+

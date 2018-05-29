@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+void my_display(unsigned char x)
+{
+  printf("%d\n",x);
+}
+
+unsigned char my_and(unsigned char x, unsigned char y)
+{
+  return (x & y);
+}
+
+unsigned char my_C_or(unsigned char x, unsigned char y)
+{
+  return (x | y);
+}
+

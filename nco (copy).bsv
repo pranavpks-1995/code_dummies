@@ -3,17 +3,18 @@ package nco;
 	import Vector ::*;
 	import Real ::*;
 	import FixedPoint :: *;
-	UInt#(16) aarr[10];
+	import BRAMCore ::*;
+
 	typedef struct 
 	{
 		// UInt#(32) sincarr[10];
 		// UInt#(32) coscarr[10];
 		Vector #(10, FixedPoint#(2,32)) sincarr;
 		Vector #(10, FixedPoint#(2,32)) coscarr;
-		FixedPoint#(8,32) lastPhase;
+		FixedPoint#(2,32) lastPhase;
 	} Result1 deriving (Bits,Eq);
 
-	function Result1 mkNco(FixedPoint#(2,32) frqBin, Bit#(64) samples_per_code, Int#(32) loopcnt, Int#(32) samplingFreq, FixedPoint#(2,32) theta);
+	/*function Result1 mkNco(FixedPoint#(2,32) frqBin, Bit#(64) samples_per_code, Int#(32) loopcnt, Int#(32) samplingFreq, FixedPoint#(2,32) theta);
 		FixedPoint#(2,32) x = fromReal(pi) ;
 		// UInt#(32) sincarry[10];
 		// UInt#(32) coscarry[10];
@@ -29,7 +30,6 @@ package nco;
 		for(i=0; i < samples_per_code; i = i+1)
 		begin
 			t[i] = $bitstoreal(i);
-
 			t[i] = (t[i]+1)/samplingFreq;
 			arg[i] = (frqBin*2*x*t[i]) + theta;
 			sincarry[i] = fromReal(sin(arg[i]));
@@ -40,7 +40,23 @@ package nco;
 		Result1 ret = Result1{sincarr:sincarry, coscarr:coscarry, lastPhase:lastPhase};
 		return ret;
 	endfunction
-endpackage: nco
+endpackage: nco*/
+
+	interface NCO_interface;
+		method Action nco(Reg#(Int#(BitSize)) frqBin, Reg#(Int#(BitSize)) samples_per_code, Reg#(Int#(BitSize)) loopcnt, Reg#(Int#(ProdSize)) samplingFreq, Reg#(Int#(BitSize) theta);
+	endinterface
+
+	module mkNco(NCO_interface);
+		Vector #(samplespercode, FixedPoint#(2,32)) sinCarr;
+		Vector #(samplespercode, FixedPoint#(2,32)) cosCarr;
+		FixedPoint#(2,32) lastPhase;
+		Real t[1000];
+		Real arg[1000];
+
+		method Action nco(Reg#(Int#(BitSize)) frqBin, Reg#(Int#(BitSize)) samples_per_code, Reg#(Int#(BitSize)) loopcnt, Reg#(Int#(ProdSize)) samplingFreq, Reg#(Int#(BitSize) theta);
+
+		endmethod
+	endmodule
 
 
 /*package nco;

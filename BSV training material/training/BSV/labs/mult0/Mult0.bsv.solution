@@ -1,0 +1,29 @@
+package Mult0; 
+
+// Simple (naive) binary multiplier
+
+typedef Bit#(16) Tin;
+typedef Bit#(32) Tout;
+
+(* synthesize *)
+module mkMult0();
+   Tin d = 9, r = 5;
+
+   Reg#(Tout)    product <- mkReg(0);
+   Reg#(Tout)    mcand   <- mkReg({0, d});
+   Reg#(Tin)     mplr    <- mkReg(r);
+
+   rule cycle ( mplr != 0 );
+      if (mplr[0] == 1) product <= product + mcand;
+      mcand   <= mcand << 1;
+      mplr    <= mplr  >> 1;
+   endrule
+   
+   rule done ( mplr == 0 );
+      $display ("Product = %d", product);
+      $finish(0);
+   endrule
+
+endmodule: mkMult0
+        
+endpackage: Mult0

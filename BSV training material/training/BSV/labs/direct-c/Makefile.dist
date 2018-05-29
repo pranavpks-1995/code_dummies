@@ -1,0 +1,8 @@
+copy:
+	cp funcs1.c.keep funcs1.c
+	cp funcs2.c.keep funcs2.c
+
+clean:
+	rm -fR *.{bi,bo,ba}
+	rm -fR *.cxx *.h *.c *.o a.out
+
